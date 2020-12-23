@@ -1,0 +1,5 @@
+.vscode
+__pycache__
+old_zips
+*.zip
+spam-data-12-s75-h25
