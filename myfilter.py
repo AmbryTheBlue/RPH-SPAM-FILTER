@@ -8,5 +8,5 @@
  import basefilter
  #this also imports corpus, utils a os (snad xD)
  import trainingcorpus #zatim k nicemu
- from emailutils import array_from_mail
+ from utils_email import array_from_mail
  
