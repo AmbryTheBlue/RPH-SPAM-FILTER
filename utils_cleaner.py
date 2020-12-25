@@ -1,7 +1,7 @@
 import re
 
 def remove_html_tags(html_text):
-  html_text = html_text.replace("\n", " ") #for some reason regular expression can't go through this
+  html_text = html_text.replace("\n", " ") #for some reason regular expression can't go through \n 
   cleanr = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
   non_html = re.sub(cleanr,'', html_text)
   return non_html
@@ -19,24 +19,16 @@ def remove_punctutation(txt):
   return txt
 
 def word_arr_from_string(s):
-  word_arr = s.lower().split(" ")
+  word_arr = s.split(" ")
   while("" in word_arr) : 
     word_arr.remove("")
   return word_arr
 
-def count_exclamation(txt):
-  count = 0
-  for char in txt:
-    if char=='!':
-      count +=1
-  return count
+def sync_capitalization_of_arr(array):
+  for i in range(len(array)):
+    array[i] = array[i].lower()
+  return array
 
-def count_percantage(txt):
-  count = 0
-  for char in txt:
-    if char=='%':
-      count +=1
-  return count
 
 if __name__ == "__main__":
     from utils_email import array_from_mail
