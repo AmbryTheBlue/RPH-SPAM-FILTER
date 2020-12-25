@@ -1,9 +1,12 @@
-#Jakub Ambroz
-#25.12.2020
+#Katerina Kucerova, Jakub Ambroz
 #RPH - uloha SPAM FILTER
-#verze 0.1
+
+#https://gitlab.fel.cvut.cz/ambrojak/rph-spam-filter
+#https://github.com/AmbryTheBlue/RPH-SPAM-FILTER
+
  
  import basefilter
  #this also imports corpus, utils a os (snad xD)
  import trainingcorpus #zatim k nicemu
-
+ from emailutils import array_from_mail
+ 
