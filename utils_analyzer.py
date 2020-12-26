@@ -2,35 +2,26 @@ from collections import Counter
 
 
 def counter_from_array(array):
-    # useless function, remains for compatibility 
+    # useless function, remains for compatibility
     c = Counter(array)
     return c
 
-def counter_difference(c_spam, c_ham, limit):
-    #NOT WORKING, remains for compatibility 
-    #replaced by c_spam - c_ham
-    spam_most = c_spam.most_common(limit)
-    ham_most = c_ham.most_common(limit)
+
+def counter_difference(c_spam, c_ham, limit_spam, limit_ham):
+    spam_most = c_spam.most_common(limit_spam)
+    ham_most = c_ham.most_common(limit_ham)
     i = 0
-    print(len(spam_most))
-    print("-------------------------")
-    #print(spam_most)
-    print("-------------------------")
-    #print(ham_most)
-    print("-------------------------")
     while (i < len(spam_most)):
         intersection = False
         for el in ham_most:
-            #print(str(el[0]) + " == " + str(spam_most[i][0]))
             if(el[0] == spam_most[i][0]):
+                print(el[0])
                 intersection = True
                 break
         if(intersection):
-            print(len(spam_most))
             spam_most.pop(i)
-            print(len(spam_most))
-        i += 1
-    print(len(spam_most))
+        else:
+            i += 1
     return spam_most
 
 
