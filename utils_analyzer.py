@@ -1,7 +1,7 @@
 from collections import Counter
 
 
-def counter_href(array):
+def count_href(array):
     words = array.lower().split()
     counter = 0
     for word in words:
@@ -24,7 +24,7 @@ def counter_difference(c_spam, c_ham, limit_spam, limit_ham):
         intersection = False
         for el in ham_most:
             if(el[0] == spam_most[i][0]):
-                print(el[0])
+                #print(el[0])
                 intersection = True
                 break
         if(intersection):
@@ -114,5 +114,5 @@ if __name__ == "__main__":
     print("---------------------------")
     print(c_diff3)
     print("---------------------------")
-    c_href = counter_href("Href refh ref ahref <href="">")
+    c_href = count_href("Href refh ref ahref <href="">")
     print(c_href)

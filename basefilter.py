@@ -25,5 +25,5 @@ class BaseFilter():
         utils.write_dict_to_file(os.path.join(
             corpus_test_dir, file), self.dict)
 
-    def crete_dict(self, parameter_list):
+    def create_dict(self):
         raise NotImplementedError("Base filter does not evaluate")
