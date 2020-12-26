@@ -3,6 +3,8 @@ ssh-add /home/ambry/.ssh/id_rsa_ambrojak
 ssh-add /home/ambry/.ssh/id_rsa_ambry
 git add .
 git commit
+#adding collaborator:
+#Co-authored-by: Katerina Kucerova <kucerka7@fel.cvut.cz>
 git push
 
 #personal - My WSL is kinda broken

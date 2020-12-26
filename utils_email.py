@@ -5,7 +5,7 @@ def array_from_mail(mail):
     Standard .items() from email package, but content is added as last value in array
     '''
     msg = email.message_from_string(mail)
-    arr = msg.items()
+    arr = msg.items() # creates an array of twos
     arr.append(["Content-Actual",msg.get_payload()])
     return arr
 

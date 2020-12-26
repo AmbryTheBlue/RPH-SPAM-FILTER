@@ -19,8 +19,8 @@ os.system("mkdir " + save_path)
 os.system("mkdir " + save_path+"/train/")
 os.system("mkdir " + save_path+"/test/")
 percantage_used = 30 #percantage portion that is used for training
+print("Saving file into data set:")
 for name, status in dictionary1.items():
-    print("Saving file into data set:")
     if (random.randint(1,100)<=50):
         dict_train[name] = status
         print("Train: " + name + " : " + status)

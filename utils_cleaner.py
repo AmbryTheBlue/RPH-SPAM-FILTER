@@ -14,7 +14,7 @@ def remove_white_space(txt):
 
 def remove_punctutation(txt):
   txt = txt.replace('"', " ")
-  for char in "..,!?:;'":
+  for char in ".,!?:;'":
     txt= txt.replace(char,"")
   return txt
 

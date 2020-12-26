@@ -7,12 +7,9 @@ import corpus
 import os
 class BaseFilter():
     """
-    Basic filter for RPH, SPAM filter
+    Basic SPAM filter for RPH
     """
     def __init__(self):
-        """
-        Initialization without parameters
-        """
         pass
     
     def train(self, corpus_test_dir):
@@ -25,7 +22,4 @@ class BaseFilter():
         utils.write_dict_to_file(os.path.join(corpus_test_dir, file),self.dict)
     
     def crete_dict(self, parameter_list):
-        """
-        docstring
-        """
         raise NotImplementedError("Base filter does not evaluate")
