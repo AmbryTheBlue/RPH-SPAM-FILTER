@@ -6,9 +6,11 @@
 # Main: https://gitlab.fel.cvut.cz/ambrojak/rph-spam-filter
 # Backup: https://github.com/AmbryTheBlue/RPH-SPAM-FILTER
 
-
-import basefilter  # this also imports corpus, utils a os (snad xD)
+import os
+import basefilter
+import corpus
 import trainingcorpus  # zatim k nicemu
+import utils
 import utils_cleaner as cleaner
 import utils_analyzer as analyzer
 from utils_email import array_from_mail
@@ -28,3 +30,7 @@ class MyFilter(basefilter.BaseFilter):
     def eval_mail(string):
         mail_array = array_from_mail(string)
         pass
+
+
+if __name__ == "__main__":
+    os.system("echo Ahoj!")
