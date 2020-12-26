@@ -1,6 +1,15 @@
 from collections import Counter
 
 
+def counter_href(array):
+    words = array.lower().split()
+    counter = 0
+    for word in words:
+        if ("href" in word):
+            counter += 1
+    return counter
+    
+
 def counter_from_array(array):
     # useless function, remains for compatibility
     c = Counter(array)
@@ -96,7 +105,7 @@ if __name__ == "__main__":
         c2 = counter_from_array(array2)
         print(c2)
         print("---------------------------")
-    c_diff = counter_difference(c1, c2, 50)
+    c_diff = counter_difference(c1, c2, 50,50)
     c_diff2 = c1-c2
     print(c_diff)
     print("---------------------------")
@@ -104,3 +113,6 @@ if __name__ == "__main__":
     c_diff3 = c2-c1
     print("---------------------------")
     print(c_diff3)
+    print("---------------------------")
+    c_href = counter_href("Href refh ref ahref <href="">")
+    print(c_href)
