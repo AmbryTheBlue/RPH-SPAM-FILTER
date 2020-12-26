@@ -3,6 +3,4 @@ __pycache__
 old_zips
 *.zip
 spam-data-12-s75-h25
-experiment*.txt
-!experiment_html_removal10.txt
 my_data
