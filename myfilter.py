@@ -10,7 +10,6 @@ import os
 from collections import Counter
 import basefilter
 import corpus
-import trainingcorpus  # zatim k nicemu
 import utils
 import utils_cleaner as cleaner
 import utils_analyzer as analyzer
