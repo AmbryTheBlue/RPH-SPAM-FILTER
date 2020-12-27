@@ -97,31 +97,34 @@ class MyFilter(basefilter.BaseFilter):
         arr = cleaner.sync_capitalization_of_arr(arr)
         word_count = len(arr)
         
-        #Eval by metadata:
-        spam_meta_frequency = 0
-        ham_meta_frequency = 0
-        for i in range(len(mail_data)-1):
-            key = mail_data[i][0]
-            value = mail_data[i][1]
-            spam_chance = self.spam_meta_counter_dict.get(key, Counter())[value] /self.spam_mail_quantity
-            ham_chance = self.ham_meta_counter_dict.get(key, Counter())[value] / self.ham_mail_quantity
-            if (spam_chance>ham_chance ):
-                spam_meta_frequency += 1
-            elif (spam_chance<ham_chance):
-                ham_meta_frequency += 1
+        if(self.trained):
+            #Eval by metadata:
+            spam_meta_frequency = 0
+            ham_meta_frequency = 0
+            for i in range(len(mail_data)-1):
+                key = mail_data[i][0]
+                value = mail_data[i][1]
+                spam_chance = self.spam_meta_counter_dict.get(key, Counter())[value] /self.spam_mail_quantity
+                ham_chance = self.ham_meta_counter_dict.get(key, Counter())[value] / self.ham_mail_quantity
+                if (spam_chance>ham_chance ):
+                    spam_meta_frequency += 1
+                elif (spam_chance<ham_chance):
+                    ham_meta_frequency += 1
 
-        #Eval by words
-        spam_word_frequency = 0
-        ham_word_frequency = 0
-        for word in arr:
-            spam_chance = self.spam_word_counter[word] /self.spam_word_quantity
-            ham_chance = self.ham_word_counter[word] /self.ham_word_quantity
-            if (spam_chance>ham_chance ):
-                spam_word_frequency += 1
-            elif (spam_chance<ham_chance):
-                ham_word_frequency += 1
-        if(spam_meta_frequency>=ham_meta_frequency and  spam_word_frequency>=ham_word_frequency):
-            return True
+            #Eval by words
+            spam_word_frequency = 0
+            ham_word_frequency = 0
+            for word in arr:
+                spam_chance = self.spam_word_counter[word] /self.spam_word_quantity
+                ham_chance = self.ham_word_counter[word] /self.ham_word_quantity
+                if (spam_chance>ham_chance ):
+                    spam_word_frequency += 1
+                elif (spam_chance<ham_chance):
+                    ham_word_frequency += 1
+            if(spam_meta_frequency>=ham_meta_frequency and  spam_word_frequency>=ham_word_frequency):
+                return True
+            else:
+                return False
         else:
             return False
 
