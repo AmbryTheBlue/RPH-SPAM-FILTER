@@ -23,4 +23,4 @@ def quality_score(tp, tn, fp, fn):
 
 
 if __name__ == "__main__":
-    print(compute_quality_for_corpus("spam-data-12-s75-h25/1"))
+    print(compute_quality_for_corpus("my_data/sub/test"))

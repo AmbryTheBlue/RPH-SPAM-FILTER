@@ -70,20 +70,6 @@ class MyFilter(basefilter.BaseFilter):
         c_diff = self.spam_word_counter - self.ham_word_counter
         c_diff_my = analyzer.counter_difference(
             self.spam_word_counter, self.ham_word_counter, 200, 150)
-        #print(self.spam_meta_counter_dict)
-        print("------------------------")
-        print(self.spam_meta_counter_dict['Sender'])
-        print("------------------------")
-        print(self.ham_meta_counter_dict['Sender'])
-        print("------------------------")
-        
-        print(self.spam_meta_counter_dict.keys())
-        print("+++++++++++++++++++++++++++++++++")
-        print(self.spam_meta_counter_dict["Importance"])
-        print("------------------------")
-        print(self.ham_meta_counter_dict.keys())
-        print("+++++++++++++++++++++++++++++++++")
-        print(self.ham_meta_counter_dict["Importance"])
 
     def create_dict(self):
         my_dict = {}
@@ -95,7 +81,8 @@ class MyFilter(basefilter.BaseFilter):
         return my_dict
 
     def eval_mail(self,string):
-        content = array_from_mail(string)[-1][1]
+        mail_data = array_from_mail(string)
+        content = mail_data[-1][1]
         href_frequency = analyzer.count_href(content)
         non_html = cleaner.remove_html_tags(content)
         spaceless = cleaner.remove_white_space(non_html)
@@ -108,6 +95,20 @@ class MyFilter(basefilter.BaseFilter):
         arr = cleaner.sync_capitalization_of_arr(arr)
         word_count = len(arr)
         
+        #Eval by metadata:
+        spam_meta_frequency = 0
+        ham_meta_frequency = 0
+        for i in range(len(mail_data)-1):
+            key = mail_data[i][0]
+            value = mail_data[i][1]
+            spam_chance = self.spam_meta_counter_dict.get(key, Counter())[value] /self.spam_mail_quantity
+            ham_chance = self.ham_meta_counter_dict.get(key, Counter())[value] / self.ham_mail_quantity
+            if (spam_chance>ham_chance ):
+                spam_meta_frequency += 1
+            elif (spam_chance<ham_chance):
+                ham_meta_frequency += 1
+
+        #Eval by words
         spam_word_frequency = 0
         ham_word_frequency = 0
         for word in arr:
@@ -117,8 +118,7 @@ class MyFilter(basefilter.BaseFilter):
                 spam_word_frequency += 1
             elif (spam_chance<ham_chance):
                 ham_word_frequency += 1
-
-        if(spam_word_frequency>=ham_word_frequency):
+        if(spam_meta_frequency>=ham_meta_frequency and  spam_word_frequency>=ham_word_frequency):
             return True
         else:
             return False
@@ -126,6 +126,6 @@ class MyFilter(basefilter.BaseFilter):
 
 if __name__ == "__main__":
     f = MyFilter()
-    f.train("spam-data-12-s75-h25/2")
-    f.test("spam-data-12-s75-h25/1")
+    f.train("my_data/sub/train")
+    f.test("my_data/sub/test")
     print("Success!")
