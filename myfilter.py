@@ -18,7 +18,9 @@ from utils_email import array_from_mail
 
 class MyFilter(basefilter.BaseFilter):
     """
-    Bayessian classifier using word count, url/href count etc.
+    Ambroz, Kucerova. Filter counts word (or metadata) occurences in spam/ham train set.
+    Then predicts if each word (/ metadata) in mail is more likely to be in spam or ham.
+    If more spam words (and metadata) then ham predict the entire mail is spam
     """
 
     def __init__(self):
