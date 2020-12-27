@@ -23,6 +23,7 @@ class MyFilter(basefilter.BaseFilter):
 
     def __init__(self):
         self.trained = False
+        #Using content
         self.spam_mail_quantity = 0
         self.ham_mail_quantity = 0
         self.spam_word_quantity = 0
@@ -30,6 +31,9 @@ class MyFilter(basefilter.BaseFilter):
         self.spam_word_counter = Counter()
         self.ham_word_counter = Counter()
         self.all_word_counter = Counter()
+        #Using metadata
+        self.spam_meta_counter_dict = {}
+        self.ham_meta_counter_dict = {}
 
     def train(self, train_dir):
         self.trained = True
@@ -37,7 +41,18 @@ class MyFilter(basefilter.BaseFilter):
             train_dir+"/!truth.txt")
         corp = corpus.Corpus(train_dir)
         for fname, body in corp.emails():
-            content = array_from_mail(body)[-1][1]
+            mail_data = array_from_mail(body)
+            #Using metadata
+            for i in range(len(mail_data)-1):
+                key = mail_data[i][0]
+                value = mail_data[i][1]
+                if(file_dict[fname] == "SPAM"):
+                    self.spam_meta_counter_dict[key] = self.spam_meta_counter_dict.get(key, Counter()) + Counter([value])
+                else:
+                    self.ham_meta_counter_dict[key] = self.ham_meta_counter_dict.get(key, Counter()) + Counter([value])
+
+            #Using content
+            content = mail_data[-1][1]
             non_html = cleaner.remove_html_tags(content)
             spaceless = cleaner.remove_white_space(non_html)
             clean = cleaner.remove_punctutation(spaceless)
@@ -55,6 +70,20 @@ class MyFilter(basefilter.BaseFilter):
         c_diff = self.spam_word_counter - self.ham_word_counter
         c_diff_my = analyzer.counter_difference(
             self.spam_word_counter, self.ham_word_counter, 200, 150)
+        #print(self.spam_meta_counter_dict)
+        print("------------------------")
+        print(self.spam_meta_counter_dict['Sender'])
+        print("------------------------")
+        print(self.ham_meta_counter_dict['Sender'])
+        print("------------------------")
+        
+        print(self.spam_meta_counter_dict.keys())
+        print("+++++++++++++++++++++++++++++++++")
+        print(self.spam_meta_counter_dict["Importance"])
+        print("------------------------")
+        print(self.ham_meta_counter_dict.keys())
+        print("+++++++++++++++++++++++++++++++++")
+        print(self.ham_meta_counter_dict["Importance"])
 
     def create_dict(self):
         my_dict = {}
