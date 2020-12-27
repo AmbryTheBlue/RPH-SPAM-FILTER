@@ -21,7 +21,7 @@ class BaseFilter():
     def test(self, corpus_test_dir):
         self.corpus = corpus.Corpus(corpus_test_dir)
         self.dict = self.create_dict()
-        file = "!predictions.txt"
+        file = "!prediction.txt"
         utils.write_dict_to_file(os.path.join(
             corpus_test_dir, file), self.dict)
 

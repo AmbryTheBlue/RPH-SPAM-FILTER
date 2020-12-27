@@ -12,7 +12,7 @@ def compute_quality_for_corpus(corpus_dir):
     truth_dict = utils.read_classification_from_file(
         os.path.join(corpus_dir, "!truth.txt"))
     pred_dict = utils.read_classification_from_file(
-        os.path.join(corpus_dir, "!predictions.txt"))
+        os.path.join(corpus_dir, "!prediction.txt"))
     cm = BCM(pos_tag="SPAM", neg_tag="OK")
     cm.compute_from_dicts(truth_dict, pred_dict)
     return quality_score(cm.as_dict()['tp'], cm.as_dict()['tn'], cm.as_dict()['fp'], cm.as_dict()['fn'])
