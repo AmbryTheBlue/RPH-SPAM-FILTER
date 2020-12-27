@@ -19,7 +19,7 @@ class Corpus():
         file_list = os.listdir(self.path)
         for file in file_list:
             if(file[0]!='!'):
-                yield file, open(os.path.join(self.path, file), 'r').read()
+                yield file, open(os.path.join(self.path, file), 'r', encoding='utf-8').read()
 
 if __name__ == "__main__":
     c = Corpus("spam-data-12-s75-h25/1")
