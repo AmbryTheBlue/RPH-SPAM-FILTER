@@ -15,6 +15,10 @@ def compute_quality_for_corpus(corpus_dir):
         os.path.join(corpus_dir, "!prediction.txt"))
     cm = BCM(pos_tag="SPAM", neg_tag="OK")
     cm.compute_from_dicts(truth_dict, pred_dict)
+    print("tp: " + str(cm.as_dict()['tp']))
+    print("tn: " + str(cm.as_dict()['tn']))
+    print("fp: " + str(cm.as_dict()['fp']))
+    print("fn: " + str(cm.as_dict()['fn']))
     return quality_score(cm.as_dict()['tp'], cm.as_dict()['tn'], cm.as_dict()['fp'], cm.as_dict()['fn'])
 
 

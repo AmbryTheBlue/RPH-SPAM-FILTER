@@ -17,7 +17,7 @@ def random_subset(number, name, percantage_used):
     os.system("mkdir " + save_path)
     os.system("mkdir " + save_path+"/train/")
     os.system("mkdir " + save_path+"/test/")
-    print("Saving file into data set:")
+    print("Saving files into data set folders")
     for name, status in dictionary.items():
         if (random.randint(1, 100) <= percantage_used): # percantage portion that is used for training
             dict_train[name] = status
@@ -38,4 +38,4 @@ def random_subset(number, name, percantage_used):
 
 
 if __name__ == "__main__":
-    random_subset(1, "sub", 10)
+    random_subset(2, "sub", 30)
