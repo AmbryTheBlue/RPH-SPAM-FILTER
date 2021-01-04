@@ -4,3 +4,8 @@ old_zips
 *.zip
 spam-data-12-s75-h25
 my_data
+*.ini
+presentation/*
+!presentation/*.tex
+!presentation/*.pdf
+!presentation/*.png
