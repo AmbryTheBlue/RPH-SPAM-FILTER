@@ -1,40 +1,77 @@
 \documentclass{beamer}
-\title{Příprava obrázků k~OCR}
-\subtitle{Obhajoba maturitní práce}
-\author{Jakub Ambroz}
 \usepackage[czech]{babel}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{textpos}
+\title{Spam Filter}
+\subtitle{Semestrální úloha z RPH}
+\author[Jakub Ambroz a Kateřina Kučerová]{Jakub Ambroz a Kateřina Kučerová\\ \includegraphics[height=2cm]{logo.png}}
+\institute[ČVUT]{České vysoké učení technické}
+\date{\today}
 
 \usetheme{Malmoe}
 \usecolortheme{whale}
 \setbeamertemplate{enumerate items}[default]
 \setbeamertemplate{itemize items}[default]
+
+\addtobeamertemplate{frametitle}{}{%
+\begin{textblock*}{100mm}(.98\textwidth,-0.7cm)
+\includegraphics[height=0.6cm]{logo.png}
+\end{textblock*}}
+
 \begin{document}
 	\begin{frame}
-		\titlepage
+		\maketitle
 	\end{frame}
-\section{sekce}	
+\section{Spam filter}	
 \begin{frame}
-\frametitle{Self explenatory}
+\frametitle{Úvod}
 \begin{itemize}
-\item \emph{AI} = \emph{Zvýraznění} = sds
+\item Knihovna emails k rozdělení textu souboru na části
+\item Tokenizace pomocí "str.replace" a \emph{regular expression} k odstranění html tagů
+\item Rozdělení na slova
 \end{itemize}
 \end{frame}
-\subsection{podsekce}
 \begin{frame}
-\frametitle{Tesseract}
-\begin{itemize}
-\item seznam
-\item 2
-\item 3
-\item 4
-\end{itemize}
+	\frametitle{Popis}
+	\begin{itemize}
+		\item Náš filtr funguje na principu počítání četnosti výskytu slov ve spamech a v hamech. Pak počítá jestli je slovo v testovaném emailu častěji v spamech či v hamech
+		\item Využití metadat o emailu stejným způsobem
+		\item Spojení obou pravidel logickým and - odstranění většiny False Positives
+	\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Testovací sada}
+	\begin{itemize}
+		\item Vytvoření náhodné trénovací a testovací. Napůl pomocí pythonu napůl příkazové řádky
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=1\textwidth]{shell.png}
+	\end{figure}
+\end{frame}
+
+\section{Spolupráce}
+\begin{frame}
+\frametitle{Spolupráce: GitLab}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{TODO_LIST.png}
+\end{figure}
 \end{frame}
 
 \begin{frame}
-    Ukázka jak na obrázek ve zdrojáku
-    %\includegraphics[width=1\textwidth]{obrazky/threshold_gauss(9,4).jpg}
+    \frametitle{Spolupráce: VSCode - Liveshare}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{liveshare2.png}
+\end{figure}
 \end{frame}
-
+\begin{frame}
+	\frametitle{Výsledky}
+	\begin{figure}
+		\centering
+		\includegraphics[width=1\textwidth]{results.png}
+	\end{figure}
+\end{frame}
 \end{document}
